@@ -1,0 +1,24 @@
+#!/usr/bin/bash
+echo "== Sync Bucket"
+
+if [ $# -eq 0 ]; then
+    echo "No Bucket Name Provided"
+    exit 1
+fi
+
+
+BUCKET_NAME="$1"
+TOTAL_FILES="$2"
+BASE_DIR="/tmp"
+OUTPUT_PATH="$BASE_DIR/tmp-files"
+
+# Remove old directory if it exists, quietly
+[ -d "$OUTPUT_PATH" ] && rm -rf "$OUTPUT_PATH"
+
+mkdir -p $OUTPUT_PATH
+cd $OUTPUT_PATH
+for i in $(seq 1 "$TOTAL_FILES"); do
+    touch "file$i"
+done
+
+aws s3 sync $OUTPUT_PATH s3://$BUCKET_NAME

@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+echo "== Delete Bucket"
+
+if [ $# -eq 0 ]; then
+    echo "No Bucket Name Provided"
+    exit 1
+fi
+
+BUCKET_NAME="$1"
+aws s3api delete-bucket --bucket $BUCKET_NAME
