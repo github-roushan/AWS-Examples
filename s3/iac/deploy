@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+echo "Cloud Formation Creating"
+
+STACK_NAME="cfn-s3-simple"
+aws cloudformation deploy \
+--template-file template.yaml \
+--region ap-south-1 \
+--no-execute-changeset \
+--stack-name $STACK_NAME
